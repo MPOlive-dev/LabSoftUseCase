@@ -24,6 +24,12 @@ class Program
         string dataFimStr = Console.ReadLine() ?? "";
         DateTime dataFim = DateTime.Parse(dataFimStr);
 
+        while (dataFim < dataInicio)
+        {
+            Console.WriteLine("\n⚠️ Ops! A data de término não pode ser anterior à data de início.");
+            dataFim = LerDataValida("Digita novamente a data de término (dd/mm/aaaa): ");
+        }
+
         Tarefa tarefa = new Tarefa(nome, funcionario, dataInicio, dataFim);
 
         Console.WriteLine("\\n--- RESUMO DA TAREFA ---");
@@ -32,5 +38,23 @@ class Program
         Console.WriteLine($"Início: {tarefa.DataInicio:dd/MM/yyyy}");
         Console.WriteLine($"Término: {tarefa.DataFim:dd/MM/yyyy}");
         Console.WriteLine($"Duração: {tarefa.ObterQuantidadeDias()} dias");
+    }
+    private static DateTime LerDataValida(string mensagemPrompt)
+    {
+        DateTime dataResultado;
+        string[] formatosAceitos = { "dd/mm/yyyy", "d/m/yyyy" };
+
+        while (true)
+        {
+            Console.Write(mensagemPrompt);
+            string entrada = Console.ReadLine() ?? "";
+
+            if (DateTime.TryParseExact(entrada, formatosAceitos, CultureInfo.InvariantCulture, DateTimeStyles.None, out dataResultado))
+            {
+                return dataResultado;
+            }
+
+            Console.WriteLine("❌ Data em formato inválido! Por favor utilize o formato dd/mm/aaaa (Ex: 25/12/2024).\n");
+        }
     }
 }
