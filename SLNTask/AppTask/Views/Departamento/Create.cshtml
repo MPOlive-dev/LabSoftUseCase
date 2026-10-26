@@ -10,17 +10,18 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form action="/Departamento/Create" method="post">
+            @Html.AntiForgeryToken()
+            <div id="validation-summary" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
+                <label for="Descricao" class="control-label"></label>
+                <input name="Descricao" id="Descricao" class="form-control" />
+                <span id="erro-Descricao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ativo" class="control-label"></label>
-                <input asp-for="Ativo" class="form-control" />
-                <span asp-validation-for="Ativo" class="text-danger"></span>
+                <label for="Ativo" class="control-label"></label>
+                <input name="Ativo" id="Ativo" class="form-control" />
+                <span id="erro-Ativo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -30,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a href="/Departamento/Index">Back to List</a>
 </div>
 
 @section Scripts {
